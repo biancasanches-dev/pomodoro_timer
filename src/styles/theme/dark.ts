@@ -3,4 +3,5 @@ export const darkTheme = {
     text: "#f1f1f1",
     primary: "#664eff",
     secondary: "#6c4eb3",
+    alert: "#ff4d4f",
 }

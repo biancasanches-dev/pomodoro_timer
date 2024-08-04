@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const ButtonStyled = styled.button`
+interface ButtonProps {
+    $variant?: 'primary' | 'alert'
+}
+
+export const ButtonStyled = styled.button<ButtonProps>`
     width: 100%;
     display: flex;
     align-items: center;
@@ -10,7 +14,7 @@ export const ButtonStyled = styled.button`
     padding: 1rem 2rem;
     border: none;
     border-radius: 26px;
-    background-color: ${({ theme }) => theme.primary};
+    background-color: ${({ theme, $variant }) => $variant === 'alert' ?  theme.alert : theme.primary};
     color: inherit;
     cursor: pointer;
 
@@ -22,6 +26,4 @@ export const ButtonStyled = styled.button`
     &:not(:disabled):hover {
         scale: 1.1;
     }
-
-
 `

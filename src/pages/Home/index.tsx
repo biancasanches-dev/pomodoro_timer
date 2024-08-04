@@ -1,97 +1,73 @@
-import { Play } from "lucide-react";
-import { FormContainer, HomeContainer, TimerContainer } from "./styles";
-import Button from "../../components/Button";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { CircleX, Pause, Play } from "lucide-react";
+import { HomeContainer, StopButton } from "./styles";
+import { FormProvider, useForm } from "react-hook-form";
+import { useContext } from "react";
+import { ButtonStyled } from "../../styles/components/button.styled";
+import NewCycleForm from "./NewCycleForm";
+import Countdown from "./Countdown";
+import { CycleContext } from "../../context/CycleContext";
 
-interface FormData {
+export interface FormData {
     task: string
     minutesAmount: number
-}
-
-interface Cycle {
-    id: string
-    task: string
-    minutesAmount: number
-
 }
 
 export default function Home() {
-    const [ cycles, setCycles ] = useState<Cycle[]>([]);
-    const [ activeCycleId, setActiveCycleId ] = useState<string | null>(null)
-    const [ secondsPassed, setSecondsPassed] = useState(0)
+    const { activeCycle, isPaused, stopCurrentCycle, createNewCycle, pauseCurrentCycle, inputValues } = useContext(CycleContext)
 
-    const { register, handleSubmit, watch, reset } = useForm<FormData>();
-    const task = watch('task');
+    const newCycleForm = useForm<FormData>({
+        defaultValues:  inputValues
+    })
 
-    function handleNewCycle(data: FormData) {
-        const id = String(new Date().getTime())
+    const { handleSubmit, watch, reset } = newCycleForm
 
-        const newCycle: Cycle = {
-            id,
-            task: data.task,
-            minutesAmount: data.minutesAmount
-        }
-
-        setCycles((state) => [...state, newCycle])
-        setActiveCycleId(id)
-
-        reset()
+    function handleCreateNewCycle(data: FormData) {
+        createNewCycle(data)
+        reset(data)
     }
 
-    const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
+    function handleStopCurrentCycle() {
+        stopCurrentCycle()
+        reset({
+            task: '',
+            minutesAmount: 0
+        })
+    }
 
-    const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0
-    const currentSeconds = activeCycle ? totalSeconds - secondsPassed : 0
-
-    const minutesAmount = Math.floor(currentSeconds/60)
-    const secondsAmount = currentSeconds % 60
-
-    const minutes = String(minutesAmount).padStart(2, "0")
-    const seconds = String(secondsAmount).padStart(2, "0")
+    const task = watch('task')
 
     return(
         <HomeContainer>
-            <form action="" onSubmit={handleSubmit(handleNewCycle)}>
-                <FormContainer>
-                    <input 
-                        type="text" 
-                        id="task" 
-                        list="task-suggestions" 
-                        placeholder="Escolha a tarefa "
-                        {...register('task')}
-                    />
+            <form action="" onSubmit={handleSubmit(handleCreateNewCycle)}>
+                <FormProvider {...newCycleForm}>
+                    <NewCycleForm />
+                </FormProvider>
+                <Countdown />
 
-                    <datalist id="task-suggestions">
-                        <option value="null" />
-                    </datalist>
-
-                    <span>em</span>
-
-                    <input 
-                        type="number" 
-                        id="minutesAmount" 
-                        placeholder="00" 
-                        step={5} 
-                        min={5} 
-                        max={60} 
-                        {...register('minutesAmount', { valueAsNumber: true })}
-                    />
-                    <label htmlFor="minutesAmount">minutos</label>
-                </FormContainer>
-
-                <TimerContainer>
-                    <span>{minutes[0]}</span>
-                    <span>{minutes[1]}</span>
-                    <span>:</span>
-                    <span>{seconds[0]}</span>
-                    <span>{seconds[1]}</span>
-                </TimerContainer>
-
-               <Button disabled={!task} type="submit" > 
-                    <Play size={24} />
-                    <span>Iniciar</span>
-                </Button>
+                { activeCycle ? (
+                    <>
+                        { isPaused ? (
+                            <ButtonStyled type="button" $variant="primary" onClick={pauseCurrentCycle}>
+                                <Play size={24} />
+                                <span>Retomar</span>
+                            </ButtonStyled>
+                        ) : (
+                            <ButtonStyled type="button" $variant="alert" onClick={pauseCurrentCycle}>
+                                <Pause size={24} />
+                                <span>Pausar</span>
+                            </ButtonStyled>
+                        )}
+                        <StopButton onClick={handleStopCurrentCycle}>
+                            <CircleX size={24} />
+                            <span>Interromper</span>
+                        </StopButton>
+                    </>
+                ) : (   
+                    <ButtonStyled disabled={!task} type="submit" $variant="primary"> 
+                        <Play size={24} />
+                        <span>Iniciar</span>
+                    </ButtonStyled>
+                )}
             </form>
         </HomeContainer>
     )
