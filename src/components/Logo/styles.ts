@@ -11,5 +11,8 @@ export const LogoStyled = styled.div`
 
     span {
         font-size: 1.4rem;
+        font-weight: 500;
+        color: ${({ theme }) => theme.text};
+        text-decoration: none;
     }
 `

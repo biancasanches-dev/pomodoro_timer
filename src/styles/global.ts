@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
 	body {
 		font-family: 'Lexend', sans-serif;
 		font-weight: 300;
-		background-color: ${({ theme }) => theme.bgDark};
+		background-color: ${({ theme }) => theme.background};
 		color: ${({ theme }) => theme.text};
 	}
 `

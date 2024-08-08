@@ -1,7 +1,8 @@
 import { useContext, useEffect } from "react";
-import { TimerContainer } from "./styles";
+import { CountdownContainer, TimerContainer } from "./styles";
 import { differenceInSeconds } from "date-fns";
 import { CycleContext } from "../../../context/CycleContext";
+import ProgressCircle from "../ProgressCircle";
 
 export default function Countdown() {
     const { activeCycle, isPaused, stopCurrentCycle, secondsPassed, setSecondsPassed } = useContext(CycleContext)
@@ -45,14 +46,20 @@ export default function Countdown() {
         }
     }, [minutes, seconds, activeCycle])
 
+    console.log(currentSeconds)
 
     return(
-        <TimerContainer>
-            <span>{minutes[0]}</span>
-            <span>{minutes[1]}</span>
-            <span>:</span>
-            <span>{seconds[0]}</span>
-            <span>{seconds[1]}</span>
-        </TimerContainer>
+        <CountdownContainer>  
+            <ProgressCircle value={currentSeconds} max={totalSeconds}>
+                <TimerContainer>
+                    <span>{minutes[0]}</span>
+                    <span>{minutes[1]}</span>
+                    <span>:</span>
+                    <span>{seconds[0]}</span>
+                    <span>{seconds[1]}</span>
+                </TimerContainer>
+            </ProgressCircle>
+
+        </CountdownContainer>
     )
 };

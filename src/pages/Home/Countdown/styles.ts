@@ -1,12 +1,18 @@
 import styled from "styled-components";
 
+export const CountdownContainer = styled.div`
+    display: flex;
+    width: 100%;
+    /* padding: 7rem 0;  */
+    height: 100%;
+    flex: 1;
+`
 export const TimerContainer = styled.div`
-    width: 22rem;
-    padding: 7rem 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid blue;
     border-radius: 50%;
 
     span {

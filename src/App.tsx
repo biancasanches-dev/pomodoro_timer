@@ -1,14 +1,14 @@
 import { ThemeProvider } from "styled-components"
-import { darkTheme } from "./styles/theme/dark"
 import Router from "./Router"
 import { GlobalStyle } from "./styles/global"
 import { BrowserRouter } from "react-router-dom"
 import { CycleContextProvider } from "./context/CycleContext"
+import { defaultTheme } from "./styles/theme/defaultTheme"
 
 function App() {
 
   return (
-    <ThemeProvider theme={ darkTheme }>
+    <ThemeProvider theme={ defaultTheme }>
       <BrowserRouter>
         <CycleContextProvider>
           <Router />

@@ -12,7 +12,10 @@ export const HomeContainer = styled.main`
         display: flex;
         flex-direction: column;
         align-items: center;
+        flex: 1;
         gap: 3rem;
+        margin: 3rem 0;
+        margin-bottom: 6rem;
     }
 `
 

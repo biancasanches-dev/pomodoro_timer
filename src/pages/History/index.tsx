@@ -1,18 +1,42 @@
-import { useContext } from "react";
-import { HistoryContainer, Status } from "./styles";
+import { useContext, useState } from "react";
+import { HistoryContainer, PaginationContainer, Status, TableContainer } from "./styles";
 import { CycleContext } from "../../context/CycleContext";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+const ITEMS_PER_PAGE = 10;
 
 export default function History() {
     const { cycles } = useContext(CycleContext);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const currentCycles = cycles.slice(startIndex, endIndex);
+
+    const totalPages = Math.ceil(cycles.length / ITEMS_PER_PAGE);
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    
 
     return (
         <HistoryContainer>
             <h1>Meu histórico</h1>
 
-            <div>
-                <table>
+            {/* <div> */}
+                <TableContainer>
                     <thead>
                         <tr>
                             <th>Tarefa</th>
@@ -22,7 +46,7 @@ export default function History() {
                         </tr>
                     </thead>
                     <tbody>
-                        {cycles.map(cycle => {
+                        {currentCycles.map(cycle => {
                             return (
                                 <tr key={cycle.id}>
                                     <td>{cycle.task}</td>
@@ -42,8 +66,20 @@ export default function History() {
                             )
                         })}
                     </tbody>
-                </table>
-            </div>
+                </TableContainer>
+                
+                {totalPages > 1 &&
+                    <PaginationContainer>
+                        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+                            <ChevronLeft color="#000"/>
+                        </button>
+                        <span>{currentPage} de {totalPages}</span>
+                        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                            <ChevronRight color="#000"/>
+                        </button>
+                    </PaginationContainer>
+                }
+            {/* </div> */}
         </HistoryContainer>
     )
 };
