@@ -8,6 +8,7 @@ export interface Cycle {
     startDate: Date
     pauseDate?: Date
     stopDate?: Date
+    concluded?: Date
 }
 
 interface CycleState {
@@ -57,7 +58,7 @@ export function cyclesReducer(state: CycleState, action: any) {
                     if (cycle.id === state.activeCycleId) {
                         return {
                             ...cycle,
-                            stopDate: new Date()
+                            stopDate: new Date(),
                         }
                     } else {
                         
@@ -65,6 +66,26 @@ export function cyclesReducer(state: CycleState, action: any) {
                     }
                 }),
                 activeCycleId: null
+            }
+        case ActionTypes.CONCLUDE_CYCLE: 
+            return {
+                ...state,
+                cycles: state.cycles.map((cycle) => {
+                    if (cycle.id === state.activeCycleId) {
+                        return {
+                            ...cycle,
+                            concluded: new Date(),
+                        }
+                    } else {
+                        return cycle
+                    }
+                }),
+                activeCycleId: null
+            }
+        case ActionTypes.REMOVE_CYCLE:
+            return {
+                ...state,
+                cycles: state.cycles.filter((cycle) => cycle.id !== action.payload.id)
             }
         default:
             return state

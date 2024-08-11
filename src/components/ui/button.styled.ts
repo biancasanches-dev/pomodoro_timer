@@ -15,7 +15,7 @@ export const ButtonStyled = styled.button<ButtonProps>`
     border: none;
     border-radius: 26px;
     background-color: ${({ theme, $variant }) => $variant === 'alert' ?  theme.alert : theme.primary};
-    color: inherit;
+    color: #fafafa;
     cursor: pointer;
 
     &:disabled {
@@ -24,6 +24,7 @@ export const ButtonStyled = styled.button<ButtonProps>`
     }
 
     &:not(:disabled):hover {
-        scale: 1.1;
+        transition: box-shadow .3s;
+        box-shadow: 0 0px 15px #5e45ff90, 0 0px 15px #5e45ff90;
     }
 `

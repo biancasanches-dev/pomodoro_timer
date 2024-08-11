@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const HomeContainer = styled.main`
     width: 100%;
+    margin: 2rem 0;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -12,10 +13,8 @@ export const HomeContainer = styled.main`
         display: flex;
         flex-direction: column;
         align-items: center;
-        flex: 1;
+        justify-content: space-between;
         gap: 3rem;
-        margin: 3rem 0;
-        margin-bottom: 6rem;
     }
 `
 

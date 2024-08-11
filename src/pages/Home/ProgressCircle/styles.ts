@@ -13,8 +13,8 @@ export const StyledProgressCircle = styled.div<{ value: number }>`
 
     position: relative;
     inset: 0;
-    height: 100%;
-    width: 100%;
+    height: 22rem;
+    width: 24rem;
     border-radius: 50%;
     overflow: hidden;
     background: var(--background);

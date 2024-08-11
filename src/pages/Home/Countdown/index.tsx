@@ -3,9 +3,10 @@ import { CountdownContainer, TimerContainer } from "./styles";
 import { differenceInSeconds } from "date-fns";
 import { CycleContext } from "../../../context/CycleContext";
 import ProgressCircle from "../ProgressCircle";
+import { cycleCompletedAlert } from "../../../components/ui/alert";
 
 export default function Countdown() {
-    const { activeCycle, isPaused, stopCurrentCycle, secondsPassed, setSecondsPassed } = useContext(CycleContext)
+    const { activeCycle, isPaused, secondsPassed, setSecondsPassed, concludeCycle } = useContext(CycleContext)
 
     const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0
 
@@ -18,7 +19,10 @@ export default function Countdown() {
 
                 if (secondsDifference >= totalSeconds) {
                     clearInterval(interval)
-                    return stopCurrentCycle()
+                    // music(false)
+                    cycleCompletedAlert.fire().then(() => {
+                        concludeCycle();
+                    });
                 } else {
                     setSecondsPassed(secondsDifference)
                 }
@@ -43,10 +47,10 @@ export default function Countdown() {
     useEffect(() => {
         if (activeCycle) {
             document.title = `${minutes}:${seconds}`
+        } else {
+            document.title = "Pomodoro"
         }
     }, [minutes, seconds, activeCycle])
-
-    console.log(currentSeconds)
 
     return(
         <CountdownContainer>  
@@ -59,7 +63,6 @@ export default function Countdown() {
                     <span>{seconds[1]}</span>
                 </TimerContainer>
             </ProgressCircle>
-
         </CountdownContainer>
     )
 };

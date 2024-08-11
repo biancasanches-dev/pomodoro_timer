@@ -1,4 +1,4 @@
-import logoImg from "./../../../public/icon.svg"
+import logoImg from "/icon.svg"
 import { LogoStyled } from "./styles"
 
 export default function Logo() {

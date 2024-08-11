@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
 	* {
 		margin: 0;
 		padding: 0;
@@ -11,5 +11,6 @@ export const GlobalStyle = createGlobalStyle`
 		font-weight: 300;
 		background-color: ${({ theme }) => theme.background};
 		color: ${({ theme }) => theme.text};
+		transition: background-color .4s, color .4s;
 	}
 `

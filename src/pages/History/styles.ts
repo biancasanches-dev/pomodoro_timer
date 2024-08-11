@@ -6,6 +6,7 @@ export const HistoryContainer = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 2rem;
 `
 
 export const TableContainer = styled.table`
@@ -35,6 +36,10 @@ export const TableContainer = styled.table`
         padding: 1rem 2rem;
     }
 
+    td:last-child {
+        padding: 1rem;
+    }
+
     tr {
         border-bottom: .2px solid rgba(237, 237, 237, 0.2);
     }
@@ -42,13 +47,53 @@ export const TableContainer = styled.table`
     tr:last-child {
         border-bottom: none;
     }
+
+    button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        color: ${({ theme }) => theme.text};
+        transition: color .2s;
+
+        &:hover {
+            color: ${({ theme }) => theme.primary};
+            filter: drop-shadow(#664eff 0 0 .7rem);
+            -webkit-filter: drop-shadow(#664eff 0 0 .7rem);
+        }
+    }
+
+    @media (max-width: 768px) {
+        width: 95%;
+
+        th {
+            font-size: 1rem;
+            padding: 1rem .1rem;
+        }
+
+        th:nth-child(2) {
+            display: none;
+        }
+
+        td {
+            padding: 1rem .1rem;
+        }
+
+        td:nth-child(2) {
+            display: none;
+        }
+
+        td:last-child {
+            padding: .1rem;
+        }
+
+    }
 `
 
 export const PaginationContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin: 2rem 0;
+    margin: 1rem 0;
 
     button {
         background-color: gray;
@@ -76,7 +121,7 @@ export const PaginationContainer = styled.div`
     }
 `
 interface StatusProps {
-    color: "green" | "yellow" | "red";
+    color: "green" | "yellow" | "red" | "blue";
 }
 
 export const Status = styled.span<StatusProps>`
@@ -90,5 +135,12 @@ export const Status = styled.span<StatusProps>`
         height: .5rem;
         border-radius: 50%;
         background-color: ${props => props.color};
+    }
+
+
+    @media (max-width: 768px) {
+        text-overflow: ellipsis;
+        overflow-wrap: break-word;
+        word-break: break-word;
     }
 `

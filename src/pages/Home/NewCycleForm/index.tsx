@@ -15,17 +15,19 @@ export default function NewCycleForm() {
 
     return(
         <FormContainer>
-            <input 
-                type="text" 
-                list="task-suggestions" 
-                placeholder="Escolha a tarefa "
-                disabled={!!activeCycle}
-                {...register('task')}
-            />
+            <div>
+                <input 
+                    type="text" 
+                    list="task-suggestions" 
+                    placeholder="Escolha a tarefa "
+                    disabled={!!activeCycle}
+                    {...register('task')}
+                />
 
-            <datalist id="task-suggestions">
-                <option value="null" />
-            </datalist>
+                <datalist id="task-suggestions">
+                    <option value="null" />
+                </datalist>
+            </div>
 
             <span>em</span>
 

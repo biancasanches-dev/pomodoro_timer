@@ -1,7 +1,7 @@
 import { createContext, useEffect, useReducer, useState } from "react"
 import { FormData } from "../pages/Home"
 import { Cycle, cyclesReducer } from "../reducers/cycles/reducer"
-import { addNewCycleActions, pauseCycleActions, resumeCycleActions, stopCycleActions } from "../reducers/cycles/actions"
+import { addNewCycleActions, concludeCycleActions, pauseCycleActions, removeCycleActions, resumeCycleActions, stopCycleActions } from "../reducers/cycles/actions"
 import { differenceInSeconds } from "date-fns"
 interface CycleContextData {
     cycles: Cycle[]
@@ -10,16 +10,20 @@ interface CycleContextData {
     secondsPassed: number
     isPaused: boolean
     inputValues: FormData,
+    cycleCompleted: boolean,
     createNewCycle: (data: FormData) => void
     pauseCurrentCycle: () => void
     stopCurrentCycle: () => void
-    setSecondsPassed: (seconds: number) => void
+    setSecondsPassed: (seconds: number) => void,
+    concludeCycle: () => void,
+    removeCycleHistory: (id: string) => void
 }
 
 export const CycleContext = createContext({} as CycleContextData)
 
 export function CycleContextProvider({ children }: { children: React.ReactNode }) {
     const [ isPaused, setIsPaused ] = useState(false)
+    const [ cycleCompleted, setCycleCompleted ] = useState(false)
     const [ inputValues, setInputValues ] = useState<FormData>({
         task: '',
         minutesAmount: 0
@@ -91,6 +95,20 @@ export function CycleContextProvider({ children }: { children: React.ReactNode }
         })
         dispatch(stopCycleActions(activeCycleId))
     }
+
+    function concludeCycle() {
+        dispatch(concludeCycleActions(activeCycleId))
+        setInputValues({
+            task: '',
+            minutesAmount: 0
+        })
+        setCycleCompleted(true)
+    }
+
+    const removeCycleHistory = (id: string) => {
+        localStorage.removeItem(id);
+        dispatch(removeCycleActions(id));
+    };
     
     return (
         <CycleContext.Provider value={{
@@ -103,7 +121,10 @@ export function CycleContextProvider({ children }: { children: React.ReactNode }
             pauseCurrentCycle,
             stopCurrentCycle,
             isPaused,
-            inputValues
+            inputValues,
+            cycleCompleted,
+            concludeCycle,
+            removeCycleHistory
         }}>
             { children }
         </CycleContext.Provider>

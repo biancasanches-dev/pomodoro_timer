@@ -5,3 +5,11 @@ export const defaultTheme = {
     secondary: "#6c4eb3",
     alert: "#ff4d4f",
 }
+
+export const lightTheme = {
+    background: "#fafafa",
+    text: "#333",
+    primary: "#664eff",
+    secondary: "#6c4eb3",
+    alert: "#ff4d4f",
+}
