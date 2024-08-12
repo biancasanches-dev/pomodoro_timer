@@ -550,7 +550,7 @@ https://sweetalert2.github.io/#ajax-request`),Pw(d),typeof d.title=="string"&&(d
         filter: drop-shadow(#664eff 0 0 .7rem);
         -webkit-filter: drop-shadow(#664eff 0 0 .7rem);
     }
-`,IE="/pomodoro_timer/icon.svg",OE=Re.div`
+`,IE=""+new URL("../icon.svg",import.meta.url).href,OE=Re.div`
     display: flex;
     align-items: center;
     gap: .6rem;
