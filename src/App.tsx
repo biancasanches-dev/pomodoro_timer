@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 
 import Router from './Router'
 import { CycleContextProvider } from './context/CycleContext'
@@ -8,11 +8,11 @@ function App() {
 
     return (
         <ThemeContextProvider>
-            <BrowserRouter>
+            <HashRouter>
                 <CycleContextProvider>
                     <Router />
                 </CycleContextProvider>
-            </BrowserRouter>
+            </HashRouter>
         </ThemeContextProvider>
     )
 }
