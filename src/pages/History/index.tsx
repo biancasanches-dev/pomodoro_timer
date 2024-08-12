@@ -1,36 +1,37 @@
-import { useContext, useState } from "react";
-import { HistoryContainer, PaginationContainer, Status, TableContainer } from "./styles";
-import { CycleContext } from "../../context/CycleContext";
-import { formatDistanceToNow } from "date-fns";
-import { ptBR } from "date-fns/locale";
-import { ChevronLeft, ChevronRight, Trash } from "lucide-react";
+import { useContext, useState } from 'react'
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+import { ChevronLeft, ChevronRight, Trash } from 'lucide-react'
 
-const ITEMS_PER_PAGE = 10;
+import { CycleContext } from '../../context/CycleContext'
+import { HistoryContainer, PaginationContainer, Status, TableContainer } from './styles'
+
+const ITEMS_PER_PAGE = 10
 
 export default function History() {
-    const { cycles, removeCycleHistory } = useContext(CycleContext);
-    const [currentPage, setCurrentPage] = useState(1);
+    const { cycles, removeCycleHistory } = useContext(CycleContext)
+    const [currentPage, setCurrentPage] = useState(1)
 
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    const currentCycles = cycles.slice(startIndex, endIndex);
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+    const endIndex = startIndex + ITEMS_PER_PAGE
+    const currentCycles = cycles.slice(startIndex, endIndex)
 
-    const totalPages = Math.ceil(cycles.length / ITEMS_PER_PAGE);
+    const totalPages = Math.ceil(cycles.length / ITEMS_PER_PAGE)
 
     const handlePreviousPage = () => {
         if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
+            setCurrentPage(currentPage - 1)
         }
-    };
+    }
 
     const handleNextPage = () => {
         if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
+            setCurrentPage(currentPage + 1)
         }
-    }; 
+    } 
 
     const handleRemoveCycle = (id: string) => {
-        removeCycleHistory(id);
+        removeCycleHistory(id)
     }
 
     return (
@@ -89,4 +90,4 @@ export default function History() {
 
         </HistoryContainer>
     )
-};
+}

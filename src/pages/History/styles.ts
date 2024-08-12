@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const HistoryContainer = styled.main`
     width: 100%;
@@ -121,7 +121,7 @@ export const PaginationContainer = styled.div`
     }
 `
 interface StatusProps {
-    color: "green" | "yellow" | "red" | "blue";
+    color: 'green' | 'yellow' | 'red' | 'blue';
 }
 
 export const Status = styled.span<StatusProps>`

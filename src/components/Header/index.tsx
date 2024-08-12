@@ -1,17 +1,18 @@
-import { ClipboardList, FolderClock, Moon, Sun, Timer } from "lucide-react";
-import { HeaderStyled, LinkStyled } from "./styles";
-import Logo from "../Logo";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { ThemeContext } from "../../styles/theme/themeContext";
+import { FolderClock, Moon, Sun, Timer } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+
+import { HeaderStyled, LinkStyled } from './styles'
+import Logo from '../Logo'
+import { ThemeContext } from '../../styles/theme/themeContext'
 
 export default function Header() {
-    const { theme, themeToggler } = useContext(ThemeContext);
+    const { theme, themeToggler } = useContext(ThemeContext)
 
     return (
         <HeaderStyled>
             <div>
-                <Link to={"/"}>
+                <Link to={'/'}>
                     <Logo />
                 </Link>
                 <nav>
@@ -31,4 +32,4 @@ export default function Header() {
             </div>
         </HeaderStyled>
     )
-};
+}

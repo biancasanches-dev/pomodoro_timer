@@ -1,4 +1,4 @@
-import { CircleContent, ProgressContainer, StyledProgressCircle } from "./styles";
+import { CircleContent, ProgressContainer, StyledProgressCircle } from './styles'
 
 interface ProgressCircleProps {
     value: number;
@@ -7,7 +7,7 @@ interface ProgressCircleProps {
 }
 
 export default function ProgressCircle({ value, max, children }: ProgressCircleProps) {
-    const percentage = max > 0 ? (value / max) * 100 : 100;
+    const percentage = max > 0 ? (value / max) * 100 : 100
 
     return(
         <ProgressContainer>
@@ -18,4 +18,4 @@ export default function ProgressCircle({ value, max, children }: ProgressCircleP
             </StyledProgressCircle>
         </ProgressContainer>
     )
-};
+}

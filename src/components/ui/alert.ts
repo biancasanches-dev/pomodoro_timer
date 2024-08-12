@@ -1,4 +1,4 @@
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
 
 // Configure o SweetAlert2 e armazene em uma variável
 export const cycleCompletedAlert = Swal.mixin({
@@ -9,4 +9,4 @@ export const cycleCompletedAlert = Swal.mixin({
     customClass: {
         confirmButton: 'my-confirm-button-class', // Classe personalizada para o botão
     },
-});
+})

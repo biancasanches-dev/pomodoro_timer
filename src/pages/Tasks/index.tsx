@@ -4,4 +4,4 @@ export default function Tasks() {
             <h1>tasks</h1>
         </div>
     )
-};
+}

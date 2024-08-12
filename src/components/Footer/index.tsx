@@ -1,4 +1,4 @@
-import { FooterStyled } from "./styles";
+import { FooterStyled } from './styles'
 
 export default function Footer() {
     return(
@@ -6,4 +6,4 @@ export default function Footer() {
             <p>Feito com ❤️ por <a href="">Bianca</a></p>
         </FooterStyled>
     )
-};
+}

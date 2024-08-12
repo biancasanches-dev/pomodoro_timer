@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ProgressContainer = styled.div`
     width: 100%;
@@ -19,7 +19,7 @@ export const StyledProgressCircle = styled.div<{ value: number }>`
     overflow: hidden;
     background: var(--background);
     box-shadow: 0 0px 15px #5e45ff90, 0 0px 15px #5e45ff90;
-`;
+`
 
 export const CircleContent = styled.div`
     position: absolute;

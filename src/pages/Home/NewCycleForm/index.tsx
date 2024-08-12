@@ -1,7 +1,8 @@
-import { useContext } from "react";
-import { FormContainer } from "./styles";
-import { CycleContext } from "../../../context/CycleContext";
-import { useFormContext } from "react-hook-form";
+import { useContext } from 'react'
+import { useFormContext } from 'react-hook-form'
+
+import { FormContainer } from './styles'
+import { CycleContext } from '../../../context/CycleContext'
 
 interface FormData {
     task: string
@@ -44,4 +45,4 @@ export default function NewCycleForm() {
             <label htmlFor="minutesAmount">minutos</label>
         </FormContainer>
     )
-};
+}

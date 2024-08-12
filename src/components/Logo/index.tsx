@@ -1,5 +1,6 @@
-import logoImg from "/icon.svg"
-import { LogoStyled } from "./styles"
+import logoImg from '/icon.svg'
+
+import { LogoStyled } from './styles'
 
 export default function Logo() {
     return(
@@ -8,4 +9,4 @@ export default function Logo() {
             <span>Pomodoro</span>
         </LogoStyled>
     )
-};
+}

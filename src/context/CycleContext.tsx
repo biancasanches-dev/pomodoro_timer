@@ -1,8 +1,9 @@
-import { createContext, useEffect, useReducer, useState } from "react"
-import { FormData } from "../pages/Home"
-import { Cycle, cyclesReducer } from "../reducers/cycles/reducer"
-import { addNewCycleActions, concludeCycleActions, pauseCycleActions, removeCycleActions, resumeCycleActions, stopCycleActions } from "../reducers/cycles/actions"
-import { differenceInSeconds } from "date-fns"
+import { createContext, useEffect, useReducer, useState } from 'react'
+import { differenceInSeconds } from 'date-fns'
+
+import { FormData } from '../pages/Home'
+import { Cycle, cyclesReducer } from '../reducers/cycles/reducer'
+import { addNewCycleActions, concludeCycleActions, pauseCycleActions, removeCycleActions, resumeCycleActions, stopCycleActions } from '../reducers/cycles/actions'
 interface CycleContextData {
     cycles: Cycle[]
     activeCycle: Cycle | undefined
@@ -41,7 +42,7 @@ export function CycleContextProvider({ children }: { children: React.ReactNode }
             return initialState
         }
 
-    });
+    })
 
     const { cycles, activeCycleId } = cyclesState
     const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
@@ -82,7 +83,7 @@ export function CycleContextProvider({ children }: { children: React.ReactNode }
             setIsPaused(false)
             dispatch(resumeCycleActions())
         } else {
-            setIsPaused(true);
+            setIsPaused(true)
             dispatch(pauseCycleActions())
         }
     }
@@ -106,9 +107,9 @@ export function CycleContextProvider({ children }: { children: React.ReactNode }
     }
 
     const removeCycleHistory = (id: string) => {
-        localStorage.removeItem(id);
-        dispatch(removeCycleActions(id));
-    };
+        localStorage.removeItem(id)
+        dispatch(removeCycleActions(id))
+    }
     
     return (
         <CycleContext.Provider value={{

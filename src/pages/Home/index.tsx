@@ -1,12 +1,13 @@
-import { CircleX, Pause, Play } from "lucide-react";
-import { HomeContainer, StopButton } from "./styles";
-import { FormProvider, useForm } from "react-hook-form";
-import { useContext } from "react";
-import { ButtonStyled } from "../../components/ui/button.styled";
-import NewCycleForm from "./NewCycleForm";
-import Countdown from "./Countdown";
-import { CycleContext } from "../../context/CycleContext";
-import Music from "./Music";
+import { CircleX, Pause, Play } from 'lucide-react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useContext } from 'react'
+
+import { HomeContainer, StopButton } from './styles'
+import { ButtonStyled } from '../../components/ui/button.styled'
+import NewCycleForm from './NewCycleForm'
+import Countdown from './Countdown'
+import { CycleContext } from '../../context/CycleContext'
+import Music from './Music'
 export interface FormData {
     task: string
     minutesAmount: number
@@ -76,4 +77,4 @@ export default function Home() {
             </form>
         </HomeContainer>
     )
-};
+}

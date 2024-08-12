@@ -1,9 +1,10 @@
-import { useContext, useEffect } from "react";
-import { CountdownContainer, TimerContainer } from "./styles";
-import { differenceInSeconds } from "date-fns";
-import { CycleContext } from "../../../context/CycleContext";
-import ProgressCircle from "../ProgressCircle";
-import { cycleCompletedAlert } from "../../../components/ui/alert";
+import { useContext, useEffect } from 'react'
+import { differenceInSeconds } from 'date-fns'
+
+import { CountdownContainer, TimerContainer } from './styles'
+import { CycleContext } from '../../../context/CycleContext'
+import ProgressCircle from '../ProgressCircle'
+import { cycleCompletedAlert } from '../../../components/ui/alert'
 
 export default function Countdown() {
     const { activeCycle, isPaused, secondsPassed, setSecondsPassed, concludeCycle } = useContext(CycleContext)
@@ -11,7 +12,7 @@ export default function Countdown() {
     const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0
 
     useEffect(() => {
-        let interval: number;
+        let interval: number
 
         if (activeCycle && !isPaused) {
             interval = setInterval(() => {
@@ -21,8 +22,8 @@ export default function Countdown() {
                     clearInterval(interval)
                     // music(false)
                     cycleCompletedAlert.fire().then(() => {
-                        concludeCycle();
-                    });
+                        concludeCycle()
+                    })
                 } else {
                     setSecondsPassed(secondsDifference)
                 }
@@ -34,21 +35,21 @@ export default function Countdown() {
             clearInterval(interval)
         }
 
-    }, [activeCycle, isPaused, totalSeconds])
+    }, [activeCycle, isPaused, totalSeconds, setSecondsPassed, concludeCycle])
 
     const currentSeconds = activeCycle ? totalSeconds - secondsPassed : 0
 
     const minutesAmount = Math.floor(currentSeconds/60)
     const secondsAmount = currentSeconds % 60
 
-    const minutes = String(minutesAmount).padStart(2, "0")
-    const seconds = String(secondsAmount).padStart(2, "0")
+    const minutes = String(minutesAmount).padStart(2, '0')
+    const seconds = String(secondsAmount).padStart(2, '0')
 
     useEffect(() => {
         if (activeCycle) {
             document.title = `${minutes}:${seconds}`
         } else {
-            document.title = "Pomodoro"
+            document.title = 'Pomodoro'
         }
     }, [minutes, seconds, activeCycle])
 
@@ -65,4 +66,4 @@ export default function Countdown() {
             </ProgressCircle>
         </CountdownContainer>
     )
-};
+}

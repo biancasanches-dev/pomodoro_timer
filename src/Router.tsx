@@ -1,8 +1,9 @@
-import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import History from './pages/History';
-import Layout from './pages/Layout';
-import Tasks from './pages/Tasks';
+import { Routes, Route } from 'react-router-dom'
+
+import Home from './pages/Home'
+import History from './pages/History'
+import Layout from './pages/Layout'
+import Tasks from './pages/Tasks'
 
 export default function Router() {
     return(
@@ -14,4 +15,4 @@ export default function Router() {
             </Route>
         </Routes>
     )
-};
+}

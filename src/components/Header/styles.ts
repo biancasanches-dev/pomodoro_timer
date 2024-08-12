@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const HeaderStyled = styled.header`
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
